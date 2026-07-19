@@ -10,7 +10,7 @@ let nombreUsuario = prompt("¡Hola! Bienvenido a la aplicación. ¿Cuál es tu n
 
 // Validar que el usuario no haya dejado el campo vacío o cancelado
 if (!nombreUsuario) {
-    nombreUsuario = "Desarrollador/a Anónimo/a";
+    nombreUsuario = "Anónimo";
 }
 
 // Mostrar un saludo personalizado en una ventana emergente
@@ -90,3 +90,53 @@ switch (tipoCliente) {
         console.log("Beneficio aplicado: Cliente Estándar - Sin beneficios adicionales asignados.");
         break;
 }
+
+// ==========================================
+// LECCIÓN 3: ARREGLOS Y CICLOS
+// ==========================================
+
+console.log("\n--- Iniciando Lección 3 ---");
+
+// 1. Crear un arreglo con una lista de elementos (precios de servicios de diseño/desarrollo)
+let listaPrecios = [120, 450, 80, 250, 600, 150];
+console.log("Lista inicial de precios registrados:", listaPrecios);
+
+// 2. Usar un bucle FOR para recorrer el arreglo y calcular el total acumulado
+let sumaTotalCiclo = 0;
+
+for (let i = 0; i < listaPrecios.length; i++) {
+    console.log("Procesando índice " + i + " -> Precio: $" + listaPrecios[i]);
+    sumaTotalCiclo += listaPrecios[i];
+}
+console.log("Suma total acumulada con bucle FOR: $" + sumaTotalCiclo);
+
+// 3. Usar un bucle WHILE para realizar una simulación de cobros controlados
+console.log("--- Simulación con bucle WHILE ---");
+let contador = 0;
+let saldoSimulado = 1000; // Presupuesto máximo del cliente
+
+while (saldoSimulado > 0 && contador < listaPrecios.length) {
+    let precioActual = listaPrecios[contador];
+    
+    if (saldoSimulado >= precioActual) {
+        saldoSimulado -= precioActual;
+        console.log("Compra aprobada: $" + precioActual + ". Saldo restante: $" + saldoSimulado);
+    } else {
+        console.log("Compra rechazada para $" + precioActual + ": Saldo insuficiente ($" + saldoSimulado + ")");
+    }
+    contador++; // Importantísimo para evitar bucles infinitos
+}
+
+// 4. Implementar una función básica para filtrar elementos según una condición
+// La idea es identificar cuáles son los servicios "Premium" (precios mayores a 200)
+function filtrarServiciosCaros(arregloPrecios) {
+    // Usamos el método filter de JavaScript, que recorre internamente el arreglo bajo una condición
+    let filtrados = arregloPrecios.filter(function(precio) {
+        return precio > 200;
+    });
+    return filtrados;
+}
+
+// Llamamos a la función de filtrado y mostramos el resultado
+let serviciosPremium = filtrarServiciosCaros(listaPrecios);
+console.log("Servicios Premium (mayores a $200):", serviciosPremium);
