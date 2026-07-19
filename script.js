@@ -140,3 +140,62 @@ function filtrarServiciosCaros(arregloPrecios) {
 // Llamamos a la función de filtrado y mostramos el resultado
 let serviciosPremium = filtrarServiciosCaros(listaPrecios);
 console.log("Servicios Premium (mayores a $200):", serviciosPremium);
+
+
+// ==========================================
+// LECCIÓN 4: FUNCIONES EN JAVASCRIPT
+// ==========================================
+
+console.log("\n--- Iniciando Lección 4 ---");
+
+// 1. Crear funciones individuales para cada operación matemática básica
+function sumar(a, b) {
+    return a + b;
+}
+
+function restar(a, b) {
+    return a - b;
+}
+
+function multiplicar(a, b) {
+    return a * b;
+}
+
+function dividir(a, b) {
+    if (b === 0) {
+        console.warn("Validación: No se puede dividir por cero.");
+        return 0;
+    }
+    return a / b;
+}
+
+// 2. Implementar una función optimizada que llama a otras funciones internamente
+// Esta función recibe el subtotal, calcula el impuesto usando 'multiplicar' y el total usando 'sumar'
+function calcularPresupuestoFinal(subtotal, porcentajeImpuesto) {
+    console.log("--- Modularización: Calculando presupuesto final ---");
+    
+    // Validamos que los parámetros recibidos sean válidos antes de operar
+    if (isNaN(subtotal) || isNaN(porcentajeImpuesto)) {
+        return "Error: Parámetros inválidos para el cálculo.";
+    }
+
+    // Convertimos el porcentaje (ej: 19) a decimal (0.19) usando nuestra función de división
+    let factorImpuesto = dividir(porcentajeImpuesto, 100);
+    
+    // Calculamos el valor del impuesto llamando a la función multiplicar
+    let impuesto = multiplicar(subtotal, factorImpuesto);
+    
+    // Calculamos el total final llamando a la función sumar
+    let totalFinal = sumar(subtotal, impuesto);
+
+    // Retornamos un mensaje estructurado de forma clara
+    return "Subtotal: $" + subtotal + " | Impuesto (" + porcentajeImpuesto + "%): $" + impuesto + " | Total: $" + totalFinal;
+}
+
+// 3. Probar el funcionamiento llamando a las funciones modulares con datos reales
+console.log("Prueba directa de función sumar (45 + 55): " + sumar(45, 55));
+console.log("Prueba directa de función dividir (100 / 0): " + dividir(100, 0));
+
+// Ejecutamos la función optimizada pasándole un subtotal de 500 y un impuesto del 19%
+let resultadoPresupuesto = calcularPresupuestoFinal(500, 19);
+console.log(resultadoPresupuesto);
