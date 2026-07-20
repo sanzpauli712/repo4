@@ -199,3 +199,63 @@ console.log("Prueba directa de función dividir (100 / 0): " + dividir(100, 0));
 // Ejecutamos la función optimizada pasándole un subtotal de 500 y un impuesto del 19%
 let resultadoPresupuesto = calcularPresupuestoFinal(500, 19);
 console.log(resultadoPresupuesto);
+
+
+// ==========================================
+// LECCIÓN 5: OBJETOS EN JAVASCRIPT
+// ==========================================
+
+console.log("\n--- Iniciando Lección 5 ---");
+
+// 1. Crear un arreglo de objetos para estructurar nuestro catálogo de servicios
+let catalogoServicios = [
+    {
+        id: 1,
+        nombre: "Diseño de Identidad de Marca",
+        precioBase: 300,
+        categoria: "Diseño",
+        // 2. Implementar un método dentro del objeto para calcular precio con descuento
+        calcularDescuento: function(porcentaje) {
+            let ahorro = (this.precioBase * porcentaje) / 100;
+            return this.precioBase - ahorro;
+        }
+    },
+    {
+        id: 2,
+        nombre: "Desarrollo Landing Page",
+        precioBase: 500,
+        categoria: "Desarrollo",
+        calcularDescuento: function(porcentaje) {
+            let ahorro = (this.precioBase * porcentaje) / 100;
+            return this.precioBase - ahorro;
+        }
+    },
+    {
+        id: 3,
+        nombre: "Consultoría UX/UI",
+        precioBase: 150,
+        categoria: "Diseño",
+        calcularDescuento: function(porcentaje) {
+            let ahorro = (this.precioBase * porcentaje) / 100;
+            return this.precioBase - ahorro;
+        }
+    }
+];
+
+// 3. Usar el método forEach() para recorrer el arreglo de objetos y mostrar la información detallada
+console.log("--- Resumen del Catálogo de Servicios Disponibles ---");
+
+catalogoServicios.forEach(function(servicio) {
+    // Calculamos un precio de oferta aplicando un 10% de descuento usando el método del objeto
+    let precioOferta = servicio.calcularDescuento(10);
+    
+    console.log(
+        "Servicio N°" + servicio.id + ": " + servicio.nombre + 
+        "\n Categoría: " + servicio.categoria +
+        "\n Precio Base: $" + servicio.precioBase + 
+        "\n ¡Precio Oferta (10% OFF)!: $" + precioOferta +
+        "\n --------------------------------------"
+    );
+});
+
+console.log("¡Proyecto consola completado con éxito!");
